@@ -21,16 +21,21 @@ namespace WebApplication6
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-                        builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddEndpointsApiExplorer();
 
-                        builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen();
 
-                        builder.Services.AddAuthentication()
-                            .AddGoogle(googleOptions =>
-                            {
-                                googleOptions.ClientId = config["GoogleKeys:ClientId"] ?? throw new InvalidOperationException();
-                                googleOptions.ClientSecret = config["GoogleKeys:ClientSecret"] ?? throw new InvalidOperationException();
-                            })
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            builder.Services.AddAuthentication()
+                .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = config["GoogleKeys:ClientId"] ?? throw new InvalidOperationException();
+                    googleOptions.ClientSecret = config["GoogleKeys:ClientSecret"] ?? throw new InvalidOperationException();
+                });
 
             var app = builder.Build();
 

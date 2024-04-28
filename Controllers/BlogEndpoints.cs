@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OpenApi;
 using WebApplication6.Areas.Identity.Data;
 using WebApplication6.Models;
 namespace WebApplication6.Controllers;

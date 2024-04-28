@@ -25,6 +25,13 @@ namespace WebApplication6
 
                         builder.Services.AddSwaggerGen();
 
+                        builder.Services.AddAuthentication()
+                            .AddGoogle(googleOptions =>
+                            {
+                                googleOptions.ClientId = config["GoogleKeys:ClientId"] ?? throw new InvalidOperationException();
+                                googleOptions.ClientSecret = config["GoogleKeys:ClientSecret"] ?? throw new InvalidOperationException();
+                            })
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

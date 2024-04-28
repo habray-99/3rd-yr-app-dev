@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication6.Areas.Identity.Data;
 using WebApplication6.Models;
-namespace WebApplication6.Controllers;
+namespace WebApplication6.Endpoints;
+[Route("apis/ve1/{controller}")]
 [ApiController]
 public static class BlogEndpoints
 {
-    public static void MapBlogEndpoints (this IEndpointRouteBuilder routes)
+    public static void MapBlogEndpoints(this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup("/api/Blog").WithTags(nameof(Blog));
 
@@ -50,7 +51,7 @@ public static class BlogEndpoints
         {
             db.Blogs.Add(blog);
             await db.SaveChangesAsync();
-            return TypedResults.Created($"/api/Blog/{blog.BlogID}",blog);
+            return TypedResults.Created($"/api/Blog/{blog.BlogID}", blog);
         })
         .WithName("CreateBlog")
         .WithOpenApi();

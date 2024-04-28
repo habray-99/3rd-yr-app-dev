@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication6.Areas.Identity.Data;
+using WebApplication6.Controllers;
 
 namespace WebApplication6
 {
@@ -20,6 +21,10 @@ namespace WebApplication6
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+                        builder.Services.AddEndpointsApiExplorer();
+
+                        builder.Services.AddSwaggerGen();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -29,6 +34,12 @@ namespace WebApplication6
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+                        if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+};
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -41,8 +52,11 @@ namespace WebApplication6
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.MapRazorPages();
 
             //app.Run();
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             using (var scope = app.Services.CreateScope())
             {

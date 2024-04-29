@@ -17,13 +17,18 @@ public class WebApplication6Context : IdentityDbContext<CustomUser>
     public DbSet<Notification> Notifications { get; set; }
     public DbSet<Reaction> Reactions { get; set; }
     public DbSet<ReactionType> ReactionTypes { get; set; }
-    public DbSet<CustomUser> User { get; set; }
-    public DbSet<User> Users { get; set; }
+    //public DbSet<CustomUser> User { get; set; }
+    public DbSet<CustomUser> Users { get; set; } = default;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<CustomUser>().Property(u => u.Id);
+
+        modelBuilder.Entity<CustomUser>()
+            .HasMany(u => u.Blogs) // Assuming CustomUser has a collection of Blogs
+            .WithOne(b => b.User) // Assuming Blog has a User property
+            .HasForeignKey(b => b.UserID);
         // Configure relationships and any additional configurations
         modelBuilder.Entity<User>()
             .HasOne(u => u.CustomUser)
@@ -35,7 +40,11 @@ public class WebApplication6Context : IdentityDbContext<CustomUser>
             .WithMany()
             .HasForeignKey(b => b.UserID)
             .OnDelete(DeleteBehavior.Restrict);
-
+        modelBuilder.Entity<Blog>()
+            .HasMany(b => b.Comments) 
+            .WithOne(c => c.Blog) 
+            .HasForeignKey(c => c.BlogID)
+            .OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<Reaction>()
             .HasOne(r => r.Blog)
             .WithMany()
@@ -44,7 +53,7 @@ public class WebApplication6Context : IdentityDbContext<CustomUser>
 
         modelBuilder.Entity<Reaction>()
             .HasOne(r => r.ReactionType)
-            .WithMany()
+            .WithMany(rt => rt.Reactions)
             .HasForeignKey(r => r.ReactionTypeID)
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -56,7 +65,7 @@ public class WebApplication6Context : IdentityDbContext<CustomUser>
 
         modelBuilder.Entity<Comment>()
             .HasOne(c => c.Blog)
-            .WithMany()
+            .WithMany(b => b.Comments)
             .HasForeignKey(c => c.BlogID)
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -68,13 +77,13 @@ public class WebApplication6Context : IdentityDbContext<CustomUser>
 
         modelBuilder.Entity<CommentReaction>()
             .HasOne(cr => cr.Comment)
-            .WithMany()
+            .WithMany(c => c.CommentReactions)
             .HasForeignKey(cr => cr.CommentID)
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<CommentReaction>()
             .HasOne(cr => cr.ReactionType)
-            .WithMany()
+            .WithMany(rt => rt.CommentReactions)
             .HasForeignKey(cr => cr.ReactionTypeID)
             .OnDelete(DeleteBehavior.Cascade);
 

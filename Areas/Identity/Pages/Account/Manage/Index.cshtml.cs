@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
+using System.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -60,19 +61,22 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            [MaxLength(30)]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
         }
 
         private async Task LoadAsync(CustomUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
-            Username = userName;
+            //var address = user.Address;
 
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                Username = userName
+                Username = userName,
+                Address = user.Address
             };
         }
 
@@ -122,6 +126,11 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            if (Input.Address != user.Address)
+            {
+                user.Address = Input.Address;
+                await _userManager.UpdateAsync(user);
+            }
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

@@ -96,34 +96,61 @@ public class Program
                     }
         }
 
+        //using (var scope = app.Services.CreateScope())
+        //{
+        //    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
+
+        //    const string email = "iamadmin@admin.com";
+        //    const string password = "Test1234";
+        //    if (await userManager.FindByEmailAsync(email) == null)
+        //    {
+        //        var user = new CustomUser
+        //        {
+        //            UserName = email,
+        //            Email = email,
+        //            EmailConfirmed = true
+        //        };
+        //        try
+        //        {
+        //            var result = await userManager.CreateAsync(user, password);
+        //            if (result.Succeeded)
+        //                await userManager.AddToRoleAsync(user, "Admin");
+        //            else
+        //                foreach (var error in result.Errors)
+        //                    // Log or handle each error
+        //                    Console.WriteLine(error.Description);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // Log or handle the exception
+        //            Console.WriteLine($"Failed to create user {email}: {ex.Message}");
+        //        }
+        //    }
+        //}
         using (var scope = app.Services.CreateScope())
         {
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
 
-            const string email = "iamadmin@admin.com";
-            const string password = "Test1234";
+            string email = "admin@admin.com";
+            string password = "Test@1234";
             if (await userManager.FindByEmailAsync(email) == null)
             {
-                var user = new CustomUser
+                var user = new CustomUser();
+                user.UserName = email;
+                user.Email = email;
+                user.EmailConfirmed = true;
+                var result = await userManager.CreateAsync(user, password);
+                if (result.Succeeded)
                 {
-                    UserName = email,
-                    Email = email,
-                    EmailConfirmed = true
-                };
-                try
-                {
-                    var result = await userManager.CreateAsync(user, password);
-                    if (result.Succeeded)
-                        await userManager.AddToRoleAsync(user, "Admin");
-                    else
-                        foreach (var error in result.Errors)
-                            // Log or handle each error
-                            Console.WriteLine(error.Description);
+                    await userManager.AddToRoleAsync(user, "Admin");
                 }
-                catch (Exception ex)
+                else
                 {
-                    // Log or handle the exception
-                    Console.WriteLine($"Failed to create user {email}: {ex.Message}");
+                    foreach (var error in result.Errors)
+                    {
+                        // Log or handle each error
+                        Console.WriteLine(error.Description);
+                    }
                 }
             }
         }

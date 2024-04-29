@@ -13,7 +13,7 @@ namespace WebApplication6.Models
         public int TotalUpvotes { get; set; }
         public int TotalDownvotes { get; set; }
         public int TotalComments { get; set; }
-        [ForeignKey("UserID")]
+        //[ForeignKey("UserID")]
         public virtual User? User { get; set; }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using WebApplication6.Areas.Identity.Data;
 
 namespace WebApplication6.Models
 {
-
+    [Table("CustomUser")]
     public class User
     {
         public string UserID { get; set; }

@@ -14,10 +14,10 @@ namespace WebApplication6.Models
         public string? UserID { get; set; }
         [Required]
         public int? ReactionTypeID { get; set; }
-        [ForeignKey("BlogID")]
+        //[ForeignKey("BlogID")]
         public virtual Blog? Blog { get; set; }
         public virtual CustomUser? User { get; set; }
-        [ForeignKey("ReactionTypeID")]
+        //[ForeignKey("ReactionTypeID")]
         public virtual ReactionType? ReactionType { get; set; }
     }
 }

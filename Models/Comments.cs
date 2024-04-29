@@ -15,9 +15,9 @@ namespace WebApplication6.Models
         [Required]
         public string? CommentText { get; set; }
         public DateTime? CreatedDate { get; set; }
-        [ForeignKey("BlogID")]
+        //[ForeignKey("BlogID")]
         public virtual Blog? Blog { get; set; }
-        [ForeignKey("UserID")]
+        //[ForeignKey("UserID")]
         public virtual CustomUser? User { get; set; }
 
         public ICollection<CommentReaction>? CommentReactions { get; set; }

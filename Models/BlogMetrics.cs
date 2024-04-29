@@ -12,7 +12,7 @@ namespace WebApplication6.Models
         public int? TotalUpvotes { get; set; }
         public int? TotalDownvotes { get; set; }
         public int? TotalComments { get; set; }
-        [ForeignKey("BlogID")]
+        //[ForeignKey("BlogID")]
         public virtual Blog? Blog { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace WebApplication6.Models
         [Required]
         public string? UserID { get; set; }
         public string? ImagePath { get; set; }
-        [ForeignKey("UserID")]
+        //[ForeignKey("UserID")]
         public virtual CustomUser? User { get; set; }
 
         public ICollection<Comment>? Comments { get; set; }

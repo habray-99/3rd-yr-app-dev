@@ -7,9 +7,8 @@ namespace WebApplication6.Areas.Identity.Data;
 // Add profile data for application users by adding properties to the CustomUser class
 public class CustomUser : IdentityUser
 {
-    [Required]
-    [MaxLength(10)]
-    public string? Role { get; set; }
+    [Required] [MaxLength(10)] 
+    public string? Role { get; set; } = "Blogger";
     [ProtectedPersonalData]
     [MaxLength(30)]
     public string? Address { get; set; }

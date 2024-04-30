@@ -11,7 +11,7 @@ using WebApplication6.Areas.Identity.Data;
 
 namespace WebApplication6.Migrations
 {
-    [DbContext(typeof(WebApplication6Context))]
+    [DbContext(typeof(IdentityDBContext))]
     [Migration("20240429042111_init4")]
     partial class init4
     {

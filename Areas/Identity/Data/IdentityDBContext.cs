@@ -5,9 +5,9 @@ using WebApplication6.Models;
 namespace WebApplication6.Areas.Identity.Data;
 
 
-public class WebApplication6Context : IdentityDbContext<CustomUser>
+public class IdentityDBContext : IdentityDbContext<CustomUser>
 {
-    public WebApplication6Context(DbContextOptions<WebApplication6Context> options)
+    public IdentityDBContext(DbContextOptions<IdentityDBContext> options)
         : base(options)
     {
     }
@@ -111,6 +111,12 @@ public class WebApplication6Context : IdentityDbContext<CustomUser>
             .HasForeignKey(um => um.UserID)
             .OnDelete(DeleteBehavior.Restrict);
     }
+
+public DbSet<WebApplication6.Models.User> User { get; set; } = default!;
+
+public DbSet<WebApplication6.Models.BlogMetric> BlogMetric { get; set; } = default!;
+
+public DbSet<WebApplication6.Models.UserMetric> UserMetric { get; set; } = default!;
 
     //public DbSet<User> User { get; set; } = default!;
 }

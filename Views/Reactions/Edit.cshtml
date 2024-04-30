@@ -1,0 +1,45 @@
+﻿@model WebApplication6.Models.Reaction
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Reaction</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ReactionID" />
+            <div class="form-group">
+                <label asp-for="BlogID" class="control-label"></label>
+                <select asp-for="BlogID" class="form-control" asp-items="ViewBag.BlogID"></select>
+                <span asp-validation-for="BlogID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserID" class="control-label"></label>
+                <select asp-for="UserID" class="form-control" asp-items="ViewBag.UserID"></select>
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReactionTypeID" class="control-label"></label>
+                <select asp-for="ReactionTypeID" class="form-control" asp-items="ViewBag.ReactionTypeID"></select>
+                <span asp-validation-for="ReactionTypeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

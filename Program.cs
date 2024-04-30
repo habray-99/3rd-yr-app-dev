@@ -9,15 +9,15 @@ public class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        var connectionString = builder.Configuration.GetConnectionString("WebApplication6ContextConnection") ??
+        var connectionString = builder.Configuration.GetConnectionString("BisleriumWebBlogContextConnection") ??
                                throw new InvalidOperationException(
-                                   "Connection string 'WebApplication6ContextConnection' not found.");
+                                   "Connection string 'BisleriumWebBlogContextConnection' not found.");
 
-        builder.Services.AddDbContext<WebApplication6Context>(options => options.UseSqlServer(connectionString));
+        builder.Services.AddDbContext<IdentityDBContext>(options => options.UseSqlServer(connectionString));
 
         builder.Services.AddDefaultIdentity<CustomUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<WebApplication6Context>();
+            .AddEntityFrameworkStores<IdentityDBContext>();
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();

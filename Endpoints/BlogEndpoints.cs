@@ -12,14 +12,14 @@ public static class BlogEndpoints
     {
         var group = routes.MapGroup("/api/Blog").WithTags(nameof(Blog));
 
-        group.MapGet("/", async (WebApplication6Context db) =>
+        group.MapGet("/", async (IdentityDBContext db) =>
         {
             return await db.Blogs.ToListAsync();
         })
         .WithName("GetAllBlogs")
         .WithOpenApi();
 
-        group.MapGet("/{id}", async Task<Results<Ok<Blog>, NotFound>> (int? blogid, WebApplication6Context db) =>
+        group.MapGet("/{id}", async Task<Results<Ok<Blog>, NotFound>> (int? blogid, IdentityDBContext db) =>
         {
             return await db.Blogs.AsNoTracking()
                 .FirstOrDefaultAsync(model => model.BlogID == blogid)
@@ -30,7 +30,7 @@ public static class BlogEndpoints
         .WithName("GetBlogById")
         .WithOpenApi();
 
-        group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (int? blogid, Blog blog, WebApplication6Context db) =>
+        group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (int? blogid, Blog blog, IdentityDBContext db) =>
         {
             var affected = await db.Blogs
                 .Where(model => model.BlogID == blogid)
@@ -47,7 +47,7 @@ public static class BlogEndpoints
         .WithName("UpdateBlog")
         .WithOpenApi();
 
-        group.MapPost("/", async (Blog blog, WebApplication6Context db) =>
+        group.MapPost("/", async (Blog blog, IdentityDBContext db) =>
         {
             db.Blogs.Add(blog);
             await db.SaveChangesAsync();
@@ -56,7 +56,7 @@ public static class BlogEndpoints
         .WithName("CreateBlog")
         .WithOpenApi();
 
-        group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int? blogid, WebApplication6Context db) =>
+        group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int? blogid, IdentityDBContext db) =>
         {
             var affected = await db.Blogs
                 .Where(model => model.BlogID == blogid)

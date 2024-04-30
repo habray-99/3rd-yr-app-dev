@@ -10,7 +10,7 @@ using WebApplication6.Areas.Identity.Data;
 
 namespace WebApplication6.Migrations
 {
-    [DbContext(typeof(WebApplication6Context))]
+    [DbContext(typeof(IdentityDBContext))]
     partial class WebApplication6ContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

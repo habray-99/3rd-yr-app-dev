@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            Input = new InputModel();
         }
 
         /// <summary>
@@ -64,6 +66,10 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
             [MaxLength(30)]
             [Display(Name = "Address")]
             public string Address { get; set; }
+            [BindProperty]
+            public IFormFile ProfilePicture { get; set; }
+            [Display(Name = "Profile Picture")]
+            public string ProfilePictureSize { get; set; }
         }
 
         private async Task LoadAsync(CustomUser user)
@@ -78,6 +84,15 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
                 Username = userName,
                 Address = user.Address
             };
+            if (!string.IsNullOrEmpty(user.ProfilePictureFilePath))
+            {
+                var fileInfo = new FileInfo(user.ProfilePictureFilePath);
+                Input.ProfilePictureSize = $"Image size: {fileInfo.Length / 1024} KB";
+            }
+            else
+            {
+                Input.ProfilePictureSize = string.Empty;
+            }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -129,8 +144,59 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
             if (Input.Address != user.Address)
             {
                 user.Address = Input.Address;
-                await _userManager.UpdateAsync(user);
             }
+
+            if (Input.ProfilePicture != null &&Input.ProfilePicture is { Length: > 0 })
+            {
+                // Check file size
+                if (Input.ProfilePicture.Length > 3 * 1024 * 1024)
+                {
+                    ModelState.AddModelError(string.Empty, "Image size cannot exceed 3MB.");
+                    return Page();
+                }
+
+                // resize image
+                // Resize the image to a maximum size of 3MB
+                using var originalImage = Image.FromStream(Input.ProfilePicture.OpenReadStream());
+                int maxWidth = 2048;
+                int maxHeight = 2048;
+
+                int width = originalImage.Width;
+                int height = originalImage.Height;
+
+                if (width > maxWidth || height > maxHeight)
+                {
+                    double ratioX = (double)maxWidth / width;
+                    double ratioY = (double)maxHeight / height;
+                    double ratio = Math.Min(ratioX, ratioY);
+
+                    width = (int)(width * ratio);
+                    height = (int)(height * ratio);
+                }
+
+                using var resizedImage = new Bitmap(width, height);
+                using var graphics = Graphics.FromImage(resizedImage);
+                graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                graphics.DrawImage(originalImage, 0, 0, width, height);
+
+                // Save the resized image to a memory stream
+                using var memoryStream = new MemoryStream();
+                resizedImage.Save(memoryStream, originalImage.RawFormat);
+                var resizedImageFile = new FormFile(memoryStream, 0, memoryStream.Length, Input.ProfilePicture.Name, Input.ProfilePicture.FileName);
+
+                var fileName = $"{user.Id}_{Guid.NewGuid()}{Path.GetExtension(Input.ProfilePicture.FileName)}";
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", fileName);
+                await using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await resizedImageFile.CopyToAsync(stream);
+                }
+                user.ProfilePictureFilePath = filePath;
+                user.ProfilePicture = fileName;
+            }
+
+            await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

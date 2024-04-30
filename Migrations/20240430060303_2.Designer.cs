@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication6.Areas.Identity.Data;
 
@@ -11,9 +12,11 @@ using WebApplication6.Areas.Identity.Data;
 namespace WebApplication6.Migrations
 {
     [DbContext(typeof(IdentityDBContext))]
-    partial class WebApplication6ContextModelSnapshot : ModelSnapshot
+    [Migration("20240430060303_2")]
+    partial class _2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,6 +209,7 @@ namespace WebApplication6.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ProfilePicture")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePictureFilePath")

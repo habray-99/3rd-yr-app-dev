@@ -8,27 +8,27 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication6.Areas.Identity.Data;
 using WebApplication6.Models;
 
-namespace WebApplication6.Controllers
-{
-    public class UsersController : Controller
-    {
-        private readonly IdentityDBContext _context;
+namespace WebApplication6.Controllers;
 
-        public UsersController(IdentityDBContext context)
-        {
+public class UsersController : Controller
+{
+    private readonly IdentityDBContext _context;
+
+    public UsersController(IdentityDBContext context)
+    {
             _context = context;
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
-        {
+    // GET: Users
+    public async Task<IActionResult> Index()
+    {
             var identityDBContext = _context.User.Include(u => u.CustomUser);
             return View(await identityDBContext.ToListAsync());
         }
 
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
+    // GET: Users/Details/5
+    public async Task<IActionResult> Details(string id)
+    {
             if (id == null)
             {
                 return NotFound();
@@ -45,20 +45,20 @@ namespace WebApplication6.Controllers
             return View(user);
         }
 
-        // GET: Users/Create
-        public IActionResult Create()
-        {
+    // GET: Users/Create
+    public IActionResult Create()
+    {
             ViewData["UserID"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,Username,Email,Password,Role")] User user)
-        {
+    // POST: Users/Create
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create([Bind("UserID,Username,Email,Password,Role")] User user)
+    {
             if (ModelState.IsValid)
             {
                 _context.Add(user);
@@ -69,9 +69,9 @@ namespace WebApplication6.Controllers
             return View(user);
         }
 
-        // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(string id)
-        {
+    // GET: Users/Edit/5
+    public async Task<IActionResult> Edit(string id)
+    {
             if (id == null)
             {
                 return NotFound();
@@ -86,13 +86,13 @@ namespace WebApplication6.Controllers
             return View(user);
         }
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("UserID,Username,Email,Password,Role")] User user)
-        {
+    // POST: Users/Edit/5
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(string id, [Bind("UserID,Username,Email,Password,Role")] User user)
+    {
             if (id != user.UserID)
             {
                 return NotFound();
@@ -122,9 +122,9 @@ namespace WebApplication6.Controllers
             return View(user);
         }
 
-        // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
+    // GET: Users/Delete/5
+    public async Task<IActionResult> Delete(string id)
+    {
             if (id == null)
             {
                 return NotFound();
@@ -141,11 +141,11 @@ namespace WebApplication6.Controllers
             return View(user);
         }
 
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
+    // POST: Users/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(string id)
+    {
             var user = await _context.User.FindAsync(id);
             if (user != null)
             {
@@ -156,9 +156,8 @@ namespace WebApplication6.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(string id)
-        {
+    private bool UserExists(string id)
+    {
             return _context.User.Any(e => e.UserID == id);
         }
-    }
 }

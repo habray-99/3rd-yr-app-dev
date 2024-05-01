@@ -1,12 +1,15 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
     {
         Layout = parentLayout.ToString();
     }
     else
     {
-        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+        // Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+        Layout = "_Layout";
     }
+    
 }
 
 <h1>Manage your account</h1>

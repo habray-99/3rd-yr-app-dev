@@ -1,0 +1,91 @@
+@* @model TModel *@
+@page
+@{
+    ViewBag.Title = "Profile Page";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .profile-container {
+            margin-top: 50px;
+            padding: 20px;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: block;
+            object-fit: cover;
+        }
+    </style>
+    @* <script> *@
+    @*     document.getElementById('editProfileButton').addEventListener('click', function () { *@
+    @*         window.location.href = '@Url.Page("/Account/Manage/Index", new { area = "Identity" })'; *@
+    @*     }); *@
+    @* </script> *@
+</head>
+<body>
+    <div class="container mx-auto">
+        @* <h1 class="text-center mt-5">User Profile</h1> *@
+        <div class="row">
+            <div class="col">
+                <div class="text-center mb-4">
+                    <img src="https://images.pexels.com/photos/220429/pexels-photo-220429.jpeg?cs=srgb&dl=pexels-pixabay-220429.jpg&fm=jpg" alt="Profile Picture" class="profile-img">
+                </div>
+                <div class="text-center">
+                    @* <button id="editProfileButton" class="btn btn-primary rounded">Edit</button> *@
+                    @* <button class="btn btn-primary rounded">Edit</button> *@
+                    <a id="manage" class="btn btn-outline-primary rounded" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> Edit </a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="profile-container">
+                    <div class="profile-info">
+                        @* <p><span class="fw-bold">Name:</span> @UserManager.GetUserName(User)</p> *@
+                        @* <p><span class="fw-bold">Email:</span> @User.Email</p> *@
+                        @* <p><span class="fw-bold">Location:</span> @Model.Input.Address</p> *@
+                        @* <p><span class="fw-bold">Phone:</span> @Model.Input.PhoneNumber</p> *@
+                        <p><span class="fw-bold">Name:</span> loken</p>
+                        <p><span class="fw-bold">Email:</span> zankoden@gmail.com</p>
+                        <p><span class="fw-bold">Location:</span> pkrl</p>
+                        <p><span class="fw-bold">Phone:</span> 1234567890</p>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-3">
+                            <div class="container rounded p-3 text-center" style="border: 1px solid grey;">
+                                <p class="fw-bold">Blog Count</p>
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="container rounded p-3 text-center" style="border: 1px solid grey;">
+                                <p class="fw-bold">Upvote</p>
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="container rounded p-3 text-center" style="border: 1px solid grey;">
+                                <p class="fw-bold">Downvote</p>
+                                <p>100</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

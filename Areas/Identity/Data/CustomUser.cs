@@ -12,8 +12,7 @@ public class CustomUser : IdentityUser
     [ProtectedPersonalData]
     [MaxLength(30)]
     public string? Address { get; set; }
-    public string? ProfilePictureFilePath { get; set; }
-    public string? ProfilePicture { get; set; }
+    public byte[]? ProfilePicture { get; set; }
     public ICollection<Blog>? Blogs { get; set; }
     public ICollection<Comment>? Comments { get; set; }
     public ICollection<Reaction>? Reactions { get; set; }

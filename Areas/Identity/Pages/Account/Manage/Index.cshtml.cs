@@ -68,8 +68,8 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
             public string Address { get; set; }
             [BindProperty]
             public IFormFile ProfilePicture { get; set; }
-            [Display(Name = "Profile Picture")]
-            public string ProfilePictureSize { get; set; }
+            [BindProperty]
+            public IFormFile ProfilePictureUpload { get; set; }
         }
 
         private async Task LoadAsync(CustomUser user)
@@ -120,7 +120,8 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
-            var userName = await _userManager.GetUserNameAsync(user);
+            //var userName = await _userManager.GetUserNameAsync(user);
+            var userName = await _userManager.GetUserIdAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.Username != userName)
             {
@@ -144,59 +145,56 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
             if (Input.Address != user.Address)
             {
                 user.Address = Input.Address;
+                //await _userManager.UpdateAsync(user);
             }
-
-            //if (Input.ProfilePicture != null && Input.ProfilePicture is { Length: > 0 })
+            //if (Input.ProfilePicture != null && Input.ProfilePicture.Length > 0)
             //{
-            //    // Check file size
-            //    if (Input.ProfilePicture.Length > 3 * 1024 * 1024)
+            //    // Check the file size (in bytes)
+            //    if (Input.ProfilePicture.Length > 3 * 1024 * 1024) // 3 MB
             //    {
-            //        ModelState.AddModelError(string.Empty, "Image size cannot exceed 3MB.");
+            //        ModelState.AddModelError("ProfilePicture", "The profile picture must be 3 MB or smaller.");
             //        return Page();
             //    }
 
-            //    // resize image
-            //    // Resize the image to a maximum size of 3MB
-            //    using var originalImage = Image.FromStream(Input.ProfilePicture.OpenReadStream());
-            //    int maxWidth = 2048;
-            //    int maxHeight = 2048;
-
-            //    int width = originalImage.Width;
-            //    int height = originalImage.Height;
-
-            //    if (width > maxWidth || height > maxHeight)
+            //    using (var memoryStream = new MemoryStream())
             //    {
-            //        double ratioX = (double)maxWidth / width;
-            //        double ratioY = (double)maxHeight / height;
-            //        double ratio = Math.Min(ratioX, ratioY);
-
-            //        width = (int)(width * ratio);
-            //        height = (int)(height * ratio);
+            //        await Input.ProfilePicture.CopyToAsync(memoryStream);
+            //        user.ProfilePicture = memoryStream.ToArray();
             //    }
-
-            //    using var resizedImage = new Bitmap(width, height);
-            //    using var graphics = Graphics.FromImage(resizedImage);
-            //    graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-            //    graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            //    graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            //    graphics.DrawImage(originalImage, 0, 0, width, height);
-
-            //    // Save the resized image to a memory stream
-            //    using var memoryStream = new MemoryStream();
-            //    resizedImage.Save(memoryStream, originalImage.RawFormat);
-            //    var resizedImageFile = new FormFile(memoryStream, 0, memoryStream.Length, Input.ProfilePicture.Name, Input.ProfilePicture.FileName);
-
-            //    var fileName = $"{user.Id}_{Guid.NewGuid()}{Path.GetExtension(Input.ProfilePicture.FileName)}";
-            //    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", fileName);
-            //    await using (var stream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        await resizedImageFile.CopyToAsync(stream);
-            //    }
-            //    user.ProfilePictureFilePath = filePath;
-            //    user.ProfilePicture = fileName;
             //}
+            //// If no new picture is uploaded, keep the existing picture
+            //else
+            //{
+            //    user.ProfilePicture = user.ProfilePicture;
+            //}
+            if (Input.ProfilePictureUpload != null && Input.ProfilePictureUpload.Length > 0)
+            {
+                // Check the file size (in bytes)
+                if (Input.ProfilePictureUpload.Length > 3 * 1024 * 1024) // 3 MB
+                {
+                    ModelState.AddModelError("ProfilePicture", "The profile picture must be 3 MB or smaller.");
+                    return Page();
+                }
 
-            await _userManager.UpdateAsync(user);
+                using (var memoryStream = new MemoryStream())
+                {
+                    await Input.ProfilePictureUpload.CopyToAsync(memoryStream);
+                    user.ProfilePicture = memoryStream.ToArray();
+                }
+            }
+            // If no new picture is uploaded, keep the existing picture
+            else
+            {
+                user.ProfilePicture = user.ProfilePicture;
+            }
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                StatusMessage = "Unexpected error when trying to update user profile.";
+                return RedirectToPage();
+            }
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication6.Areas.Identity.Data;
+using WebApplication6.Models;
 
 namespace WebApplication6;
 
@@ -83,7 +84,7 @@ public class Program
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            var roles = new[] { "Admin", "Blogger", "Surfer" };
+            var roles = new[] { "Admin", "Blogger" };
             foreach (var role in roles)
                 if (!await roleManager.RoleExistsAsync(role))
                     try
@@ -96,7 +97,35 @@ public class Program
                         Console.WriteLine($"Failed to create role {role}: {ex.Message}");
                     }
         }
+        using (var scope = app.Services.CreateScope())
+        {
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
 
+            string email = "admin@admin.com";
+            string password = "Test@1234";
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                user = new CustomUser();
+                user.UserName = email;
+                user.Email = email;
+                user.EmailConfirmed = true;
+                user.Role = "Admin";
+                var result = await userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        // Log or handle each error
+                        Console.WriteLine(error.Description);
+                    }
+                }
+            }
+        }
         //using (var scope = app.Services.CreateScope())
         //{
         //    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
@@ -128,33 +157,33 @@ public class Program
         //        }
         //    }
         //}
-        using (var scope = app.Services.CreateScope())
-        {
-            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
+        //using (var scope = app.Services.CreateScope())
+        //{
+        //    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
 
-            string email = "admin@admin.com";
-            string password = "Test@1234";
-            if (await userManager.FindByEmailAsync(email) == null)
-            {
-                var user = new CustomUser();
-                user.UserName = email;
-                user.Email = email;
-                user.EmailConfirmed = true;
-                var result = await userManager.CreateAsync(user, password);
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Admin");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        // Log or handle each error
-                        Console.WriteLine(error.Description);
-                    }
-                }
-            }
-        }
+        //    string email = "admin@admin.com";
+        //    string password = "Test@1234";
+        //    if (await userManager.FindByEmailAsync(email) == null)
+        //    {
+        //        var user = new CustomUser();
+        //        user.UserName = email;
+        //        user.Email = email;
+        //        user.EmailConfirmed = true;
+        //        var result = await userManager.CreateAsync(user, password);
+        //        if (result.Succeeded)
+        //        {
+        //            await userManager.AddToRoleAsync(user, "Admin");
+        //        }
+        //        else
+        //        {
+        //            foreach (var error in result.Errors)
+        //            {
+        //                // Log or handle each error
+        //                Console.WriteLine(error.Description);
+        //            }
+        //        }
+        //    }
+        //}
 
         // Start the application
         await app.RunAsync();

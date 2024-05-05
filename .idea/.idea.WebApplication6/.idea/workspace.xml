@@ -10,7 +10,87 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c542a91-437a-4420-9bfc-9a69d4a701b0" name="Changes" comment="" />
+    <list default="true" id="2c542a91-437a-4420-9bfc-9a69d4a701b0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Areas/Identity/Data/CustomUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Areas/Identity/Data/CustomUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/BlogMetricsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/BlogsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/CommentReactionsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/CommentsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/NotificationsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ReactionTypesController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ReactionsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/UserMetricsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/UsersController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240428050236_initial.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240428050236_initial.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240429040228_init2.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240429040228_init2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240429040849_init3.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240429040849_init3.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240429042111_init4.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240429042111_init4.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240429042655_init6.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240429042655_init6.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240429042959_init7.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240429042959_init7.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240430035639_init 8.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240430035639_init 8.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240430044115_my init mg.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240430044115_my init mg.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240430044848_oe oe.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240430044848_oe oe.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240501103404_9.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240501103404_9.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/WebApplication6ContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Blog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Blog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/BlogMetrics/Create.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/BlogMetrics/Delete.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/BlogMetrics/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/BlogMetrics/Edit.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/BlogMetrics/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Blogs/Create.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Blogs/Delete.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Blogs/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Blogs/Edit.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Blogs/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/CommentReactions/Create.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/CommentReactions/Delete.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/CommentReactions/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/CommentReactions/Edit.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/CommentReactions/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Comments/Create.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Comments/Delete.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Comments/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Comments/Edit.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Comments/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Notifications/Create.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Notifications/Delete.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Notifications/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Notifications/Edit.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Notifications/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ReactionTypes/Create.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ReactionTypes/Delete.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ReactionTypes/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ReactionTypes/Edit.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ReactionTypes/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Reactions/Create.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Reactions/Delete.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Reactions/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Reactions/Edit.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Reactions/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/UserMetrics/Create.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/UserMetrics/Delete.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/UserMetrics/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/UserMetrics/Edit.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/UserMetrics/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Users/Create.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Users/Delete.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Users/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Users/Edit.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Users/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApplication6.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WebApplication6.csproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,29 +116,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.WebApplication6: http.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.42495126&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;image__upload__error&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.WebApplication6: http.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "XThreadsFramesViewSplitterKey": "0.42495126",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\User\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\User\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\User\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\User\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\User\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\User\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.WebApplication6: http">
     <configuration name="WebApplication6: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/WebApplication6.csproj" />
@@ -135,6 +215,7 @@
       <updated>1714457580144</updated>
       <workItem from="1714457587205" duration="5751000" />
       <workItem from="1714557861515" duration="1113000" />
+      <workItem from="1714635784677" duration="92000" />
     </task>
     <servers />
   </component>

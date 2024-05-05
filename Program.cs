@@ -83,7 +83,7 @@ public class Program
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            var roles = new[] { "Admin", "Blogger", "Surfer" };
+            var roles = new[] { "Admin", "Blogger" };
             foreach (var role in roles)
                 if (!await roleManager.RoleExistsAsync(role))
                     try

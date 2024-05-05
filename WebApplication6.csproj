@@ -45,4 +45,52 @@
     </ContainerEnvironmentVariable>
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\BlogMetrics\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\BlogMetrics\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\BlogMetrics\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\BlogMetrics\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\BlogMetrics\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Blogs\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Blogs\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Blogs\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Blogs\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Blogs\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\CommentReactions\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\CommentReactions\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\CommentReactions\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\CommentReactions\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\CommentReactions\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Comments\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Comments\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Comments\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Comments\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Comments\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Notifications\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Notifications\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Notifications\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Notifications\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Notifications\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Reactions\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Reactions\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Reactions\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Reactions\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Reactions\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\ReactionTypes\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\ReactionTypes\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\ReactionTypes\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\ReactionTypes\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\ReactionTypes\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\UserMetrics\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\UserMetrics\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\UserMetrics\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\UserMetrics\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\UserMetrics\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Users\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Users\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Users\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Users\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Users\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

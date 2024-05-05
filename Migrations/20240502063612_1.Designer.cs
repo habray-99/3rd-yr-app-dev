@@ -12,8 +12,8 @@ using WebApplication6.Areas.Identity.Data;
 namespace WebApplication6.Migrations
 {
     [DbContext(typeof(IdentityDBContext))]
-    [Migration("20240429042959_init7")]
-    partial class init7
+    [Migration("20240502063612_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

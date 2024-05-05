@@ -12,7 +12,7 @@ namespace WebApplication6.Models
         public string? Title { get; set; }
         [Required]
         public string? Body { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
         [Required]
         public string? UserID { get; set; }
         public string? ImagePath { get; set; }

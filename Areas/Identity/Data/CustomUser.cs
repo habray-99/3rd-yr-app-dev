@@ -8,7 +8,7 @@ namespace WebApplication6.Areas.Identity.Data;
 public class CustomUser : IdentityUser
 {
     [Required] [MaxLength(10)] 
-    public string? Role { get; set; } = "Blogger";
+    public string? Role { get; set; }
     [ProtectedPersonalData]
     [MaxLength(30)]
     public string? Address { get; set; }
@@ -18,4 +18,5 @@ public class CustomUser : IdentityUser
     public ICollection<Reaction>? Reactions { get; set; }
     public ICollection<Notification>? Notifications { get; set; }
     public ICollection<CommentReaction>? CommentReactions { get; set; }
+    //public ICollection<BlogReaction>? BlogReactions { get; set; }
 }

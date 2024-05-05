@@ -3,7 +3,6 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 using System.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +22,6 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            Input = new InputModel();
         }
 
         /// <summary>
@@ -84,15 +82,6 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
                 Username = userName,
                 Address = user.Address
             };
-            //if (!string.IsNullOrEmpty(user.ProfilePictureFilePath))
-            //{
-            //    var fileInfo = new FileInfo(user.ProfilePictureFilePath);
-            //    Input.ProfilePictureSize = $"Image size: {fileInfo.Length / 1024} KB";
-            //}
-            //else
-            //{
-            //    Input.ProfilePictureSize = string.Empty;
-            //}
         }
 
         public async Task<IActionResult> OnGetAsync()

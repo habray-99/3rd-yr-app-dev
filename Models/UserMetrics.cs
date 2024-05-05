@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApplication6.Areas.Identity.Data;
 
 namespace WebApplication6.Models
 {
@@ -14,6 +15,6 @@ namespace WebApplication6.Models
         public int TotalDownvotes { get; set; }
         public int TotalComments { get; set; }
         //[ForeignKey("UserID")]
-        public virtual User? User { get; set; }
+        public virtual CustomUser? User { get; set; }
     }
 }

@@ -18,7 +18,9 @@ public class IdentityDBContext : IdentityDbContext<CustomUser>
     public DbSet<Reaction> Reactions { get; set; }
     public DbSet<ReactionType> ReactionTypes { get; set; }
     //public DbSet<CustomUser> User { get; set; }
-    public DbSet<CustomUser> Users { get; set; } = default;
+    public DbSet<CustomUser> Users { get; set; }
+    public DbSet<BlogMetric> BlogMetrics { get; set; }
+    public DbSet<UserMetric> UserMetrics { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -112,11 +114,8 @@ public class IdentityDBContext : IdentityDbContext<CustomUser>
             .OnDelete(DeleteBehavior.Restrict);
     }
 
-public DbSet<WebApplication6.Models.User> User { get; set; } = default!;
+// public DbSet<WebApplication6.Models.User> User { get; set; } = default!;
 
-public DbSet<WebApplication6.Models.BlogMetric> BlogMetric { get; set; } = default!;
-
-public DbSet<WebApplication6.Models.UserMetric> UserMetric { get; set; } = default!;
 
     //public DbSet<User> User { get; set; } = default!;
 }

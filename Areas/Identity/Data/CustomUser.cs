@@ -19,5 +19,7 @@ public class CustomUser : IdentityUser
     public ICollection<Reaction>? Reactions { get; set; }
     public ICollection<Notification>? Notifications { get; set; }
     public ICollection<CommentReaction>? CommentReactions { get; set; }
+    public ICollection<BlogMetric>? BlogMetrics { get; set; }
+    public ICollection<UserMetric>? UserMetrics { get; set; }
     //public ICollection<BlogReaction>? BlogReactions { get; set; }
 }

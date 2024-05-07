@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -64,10 +65,11 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
             [MaxLength(30)]
             [Display(Name = "Address")]
             public string Address { get; set; }
-            [BindProperty]
-            public IFormFile ProfilePicture { get; set; }
+            //[BindProperty]
+            //public IFormFile ProfilePicture { get; set; }
             [BindProperty]
             public IFormFile ProfilePictureUpload { get; set; }
+
         }
 
         private async Task LoadAsync(CustomUser user)
@@ -158,6 +160,7 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
             //}
             if (Input.ProfilePictureUpload != null && Input.ProfilePictureUpload.Length > 0)
             {
+                Debug.Write("Size of the image uploaded is: "+Input.ProfilePictureUpload.Length);
                 // Check the file size (in bytes)
                 if (Input.ProfilePictureUpload.Length > 3 * 1024 * 1024) // 3 MB
                 {

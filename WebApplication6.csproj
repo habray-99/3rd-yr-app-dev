@@ -86,11 +86,6 @@
     <_ContentIncludedByDefault Remove="Views\UserMetrics\Details.cshtml" />
     <_ContentIncludedByDefault Remove="Views\UserMetrics\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="Views\UserMetrics\Index.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Users\Create.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Users\Delete.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Users\Details.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Users\Edit.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Users\Index.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -114,6 +114,8 @@ public class IdentityDBContext : IdentityDbContext<CustomUser>
             .OnDelete(DeleteBehavior.Restrict);
     }
 
+public DbSet<WebApplication6.Models.User> User { get; set; } = default!;
+
 // public DbSet<WebApplication6.Models.User> User { get; set; } = default!;
 
 

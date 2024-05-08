@@ -118,5 +118,6 @@ public DbSet<WebApplication6.Models.BlogMetric> BlogMetric { get; set; } = defau
 
 public DbSet<WebApplication6.Models.UserMetric> UserMetric { get; set; } = default!;
 
+
     //public DbSet<User> User { get; set; } = default!;
 }

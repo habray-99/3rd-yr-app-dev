@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -64,6 +65,11 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
             [MaxLength(30)]
             [Display(Name = "Address")]
             public string Address { get; set; }
+            //[BindProperty]
+            //public IFormFile ProfilePicture { get; set; }
+            [BindProperty]
+            public IFormFile ProfilePictureUpload { get; set; }
+
         }
 
         private async Task LoadAsync(CustomUser user)
@@ -105,7 +111,8 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
-            var userName = await _userManager.GetUserNameAsync(user);
+            //var userName = await _userManager.GetUserNameAsync(user);
+            var userName = await _userManager.GetUserIdAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.Username != userName)
             {
@@ -129,8 +136,57 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
             if (Input.Address != user.Address)
             {
                 user.Address = Input.Address;
-                await _userManager.UpdateAsync(user);
+                //await _userManager.UpdateAsync(user);
             }
+            //if (Input.ProfilePicture != null && Input.ProfilePicture.Length > 0)
+            //{
+            //    // Check the file size (in bytes)
+            //    if (Input.ProfilePicture.Length > 3 * 1024 * 1024) // 3 MB
+            //    {
+            //        ModelState.AddModelError("ProfilePicture", "The profile picture must be 3 MB or smaller.");
+            //        return Page();
+            //    }
+
+            //    using (var memoryStream = new MemoryStream())
+            //    {
+            //        await Input.ProfilePicture.CopyToAsync(memoryStream);
+            //        user.ProfilePicture = memoryStream.ToArray();
+            //    }
+            //}
+            //// If no new picture is uploaded, keep the existing picture
+            //else
+            //{
+            //    user.ProfilePicture = user.ProfilePicture;
+            //}
+            if (Input.ProfilePictureUpload != null && Input.ProfilePictureUpload.Length > 0)
+            {
+                Debug.Write("Size of the image uploaded is: "+Input.ProfilePictureUpload.Length);
+                // Check the file size (in bytes)
+                if (Input.ProfilePictureUpload.Length > 3 * 1024 * 1024) // 3 MB
+                {
+                    ModelState.AddModelError("ProfilePicture", "The profile picture must be 3 MB or smaller.");
+                    return Page();
+                }
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    await Input.ProfilePictureUpload.CopyToAsync(memoryStream);
+                    user.ProfilePicture = memoryStream.ToArray();
+                }
+            }
+            // If no new picture is uploaded, keep the existing picture
+            else
+            {
+                user.ProfilePicture = user.ProfilePicture;
+            }
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                StatusMessage = "Unexpected error when trying to update user profile.";
+                return RedirectToPage();
+            }
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

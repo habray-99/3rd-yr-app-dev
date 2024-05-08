@@ -10,7 +10,7 @@
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
     <div class="col-md-6">
-        <form id="profile-form" method="post">
+        <form id="profile-form" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Username" class="form-control" placeholder="Please choose your username." />
@@ -27,7 +27,18 @@
                 <label asp-for="Input.Address" class="form-label"></label>
                 <span asp-validation-for="Input.Address" class="text-danger"></span>
             </div>
-
+            <div class="form-group">
+                <label asp-for="Input.ProfilePictureUpload" class="control-label">Profile Picture</label>
+                <input asp-for="Input.ProfilePictureUpload" type="file" class="form-control" accept="image/*" />
+                <span asp-validation-for="Input.ProfilePictureUpload" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                  <label for="ProfilePictureUpload" class="control-label">Profile Picture</label>
+                <input id="ProfilePictureUpload" name="ProfilePictureUpload" type="file" class="form-control" accept="image/*" /> 
+               
+                 <span asp-validation-for="Input.ProfilePictureUpload" class="text-danger"></span>
+               
+            </div>
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
     </div>

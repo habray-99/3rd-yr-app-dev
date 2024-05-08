@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication6.Areas.Identity.Data;
+using WebApplication6.Models;
 
 namespace WebApplication6;
 
@@ -83,7 +84,7 @@ public class Program
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            var roles = new[] { "Admin", "Blogger", "Surfer" };
+            var roles = new[] { "Admin", "Blogger" };
             foreach (var role in roles)
                 if (!await roleManager.RoleExistsAsync(role))
                     try
@@ -96,35 +97,32 @@ public class Program
                         Console.WriteLine($"Failed to create role {role}: {ex.Message}");
                     }
         }
-
         using (var scope = app.Services.CreateScope())
         {
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
 
-            const string email = "iamadmin@admin.com";
-            const string password = "Test1234";
-            if (await userManager.FindByEmailAsync(email) == null)
+            string email = "admin@admin.com";
+            string password = "Test@1234";
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null)
             {
-                var user = new CustomUser
+                user = new CustomUser();
+                user.UserName = email;
+                user.Email = email;
+                user.EmailConfirmed = true;
+                user.Role = "Admin";
+                var result = await userManager.CreateAsync(user, password);
+                if (result.Succeeded)
                 {
-                    UserName = email,
-                    Email = email,
-                    EmailConfirmed = true
-                };
-                try
-                {
-                    var result = await userManager.CreateAsync(user, password);
-                    if (result.Succeeded)
-                        await userManager.AddToRoleAsync(user, "Admin");
-                    else
-                        foreach (var error in result.Errors)
-                            // Log or handle each error
-                            Console.WriteLine(error.Description);
+                    await userManager.AddToRoleAsync(user, "Admin");
                 }
-                catch (Exception ex)
+                else
                 {
-                    // Log or handle the exception
-                    Console.WriteLine($"Failed to create user {email}: {ex.Message}");
+                    foreach (var error in result.Errors)
+                    {
+                        // Log or handle each error
+                        Console.WriteLine(error.Description);
+                    }
                 }
             }
         }
@@ -132,29 +130,60 @@ public class Program
         //{
         //    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
 
-        //    string email = "admin@admin.com";
-        //    string password = "Test@1234";
+        //    const string email = "iamadmin@admin.com";
+        //    const string password = "Test1234";
         //    if (await userManager.FindByEmailAsync(email) == null)
         //    {
-        //        var user = new CustomUser();
-        //        user.UserName = email;
-        //        user.Email = email;
-        //        user.EmailConfirmed = true;
-        //        var result = await userManager.CreateAsync(user, password);
-        //        if (result.Succeeded)
+        //        var user = new CustomUser
         //        {
-        //            await userManager.AddToRoleAsync(user, "Admin");
+        //            UserName = email,
+        //            Email = email,
+        //            EmailConfirmed = true
+        //        };
+        //        try
+        //        {
+        //            var result = await userManager.CreateAsync(user, password);
+        //            if (result.Succeeded)
+        //                await userManager.AddToRoleAsync(user, "Admin");
+        //            else
+        //                foreach (var error in result.Errors)
+        //                    // Log or handle each error
+        //                    Console.WriteLine(error.Description);
         //        }
-        //        else
+        //        catch (Exception ex)
         //        {
-        //            foreach (var error in result.Errors)
-        //            {
-        //                // Log or handle each error
-        //                Console.WriteLine(error.Description);
-        //            }
+        //            // Log or handle the exception
+        //            Console.WriteLine($"Failed to create user {email}: {ex.Message}");
         //        }
         //    }
         //}
+        //using (var scope = app.Services.CreateScope())
+        //{
+        //    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
+
+            string email = "admin@admin.com";
+            string password = "Test@1234";
+            if (await userManager.FindByEmailAsync(email) == null)
+            {
+                var user = new CustomUser();
+                user.UserName = email;
+                user.Email = email;
+                user.EmailConfirmed = true;
+                var result = await userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        // Log or handle each error
+                        Console.WriteLine(error.Description);
+                    }
+                }
+            }
+        }
 
         // Start the application
         await app.RunAsync();

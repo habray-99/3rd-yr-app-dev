@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using WebApplication6.Areas.Identity.Data;
 using WebApplication6.Models;
+using WebApplication6.Services;
 
 namespace WebApplication6;
 
@@ -43,6 +45,16 @@ public class Program
                 opt.ClientId = config["FacebookKeys:ClientId"] ?? throw new InvalidOperationException();
                 opt.ClientSecret = config["FacebookKeys:ClientSecret"] ?? throw new InvalidOperationException();
             });
+
+        builder.Services.AddTransient<IEmailSender, EmailSender>(serviceProvider =>
+    {
+        var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+        //var fromEmail = configuration.GetValue<string>("EmailSettings:FromEmail");
+        //var fromPassword = configuration.GetValue<string>("EmailSettings:FromPassword");
+        var fromEmail = config["EmailSettings:FromEmail"];
+        var fromPassword = config["EmailSettings:FromPassword"];
+        return new EmailSender(fromEmail, fromPassword);
+    });
 
         var app = builder.Build();
 
@@ -126,6 +138,37 @@ public class Program
                 }
             }
         }
+        //using (var scope = app.Services.CreateScope())
+        //{
+        //    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
+
+        //    const string email = "iamadmin@admin.com";
+        //    const string password = "Test1234";
+        //    if (await userManager.FindByEmailAsync(email) == null)
+        //    {
+        //        var user = new CustomUser
+        //        {
+        //            UserName = email,
+        //            Email = email,
+        //            EmailConfirmed = true
+        //        };
+        //        try
+        //        {
+        //            var result = await userManager.CreateAsync(user, password);
+        //            if (result.Succeeded)
+        //                await userManager.AddToRoleAsync(user, "Admin");
+        //            else
+        //                foreach (var error in result.Errors)
+        //                    // Log or handle each error
+        //                    Console.WriteLine(error.Description);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // Log or handle the exception
+        //            Console.WriteLine($"Failed to create user {email}: {ex.Message}");
+        //        }
+        //    }
+        //}
         //using (var scope = app.Services.CreateScope())
         //{
         //    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebApplication6.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,7 @@ namespace WebApplication6.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Role = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", maxLength: 3145728, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -202,6 +202,27 @@ namespace WebApplication6.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CustomUser",
+                columns: table => new
+                {
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomUser", x => x.UserID);
+                    table.ForeignKey(
+                        name: "FK_CustomUser_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Notifications",
                 columns: table => new
                 {
@@ -230,28 +251,36 @@ namespace WebApplication6.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "UserMetrics",
                 columns: table => new
                 {
+                    UserMetricID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TotalBlogPosts = table.Column<int>(type: "int", nullable: false),
+                    TotalUpvotes = table.Column<int>(type: "int", nullable: false),
+                    TotalDownvotes = table.Column<int>(type: "int", nullable: false),
+                    TotalComments = table.Column<int>(type: "int", nullable: false),
+                    CustomUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserID);
+                    table.PrimaryKey("PK_UserMetrics", x => x.UserMetricID);
                     table.ForeignKey(
-                        name: "FK_Users_AspNetUsers_UserID",
+                        name: "FK_UserMetrics_AspNetUsers_CustomUserId",
+                        column: x => x.CustomUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserMetrics_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlogMetric",
+                name: "BlogMetrics",
                 columns: table => new
                 {
                     BlogMetricID = table.Column<int>(type: "int", nullable: false)
@@ -259,13 +288,19 @@ namespace WebApplication6.Migrations
                     BlogID = table.Column<int>(type: "int", nullable: false),
                     TotalUpvotes = table.Column<int>(type: "int", nullable: true),
                     TotalDownvotes = table.Column<int>(type: "int", nullable: true),
-                    TotalComments = table.Column<int>(type: "int", nullable: true)
+                    TotalComments = table.Column<int>(type: "int", nullable: true),
+                    CustomUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlogMetric", x => x.BlogMetricID);
+                    table.PrimaryKey("PK_BlogMetrics", x => x.BlogMetricID);
                     table.ForeignKey(
-                        name: "FK_BlogMetric_Blogs_BlogID",
+                        name: "FK_BlogMetrics_AspNetUsers_CustomUserId",
+                        column: x => x.CustomUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_BlogMetrics_Blogs_BlogID",
                         column: x => x.BlogID,
                         principalTable: "Blogs",
                         principalColumn: "BlogID",
@@ -282,7 +317,6 @@ namespace WebApplication6.Migrations
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CommentText = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    BlogID1 = table.Column<int>(type: "int", nullable: true),
                     CustomUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -305,11 +339,6 @@ namespace WebApplication6.Migrations
                         principalTable: "Blogs",
                         principalColumn: "BlogID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Comments_Blogs_BlogID1",
-                        column: x => x.BlogID1,
-                        principalTable: "Blogs",
-                        principalColumn: "BlogID");
                 });
 
             migrationBuilder.CreateTable(
@@ -321,8 +350,7 @@ namespace WebApplication6.Migrations
                     BlogID = table.Column<int>(type: "int", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ReactionTypeID = table.Column<int>(type: "int", nullable: false),
-                    CustomUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ReactionTypeID1 = table.Column<int>(type: "int", nullable: true)
+                    CustomUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -350,34 +378,6 @@ namespace WebApplication6.Migrations
                         principalTable: "ReactionTypes",
                         principalColumn: "ReactionTypeID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reactions_ReactionTypes_ReactionTypeID1",
-                        column: x => x.ReactionTypeID1,
-                        principalTable: "ReactionTypes",
-                        principalColumn: "ReactionTypeID");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserMetric",
-                columns: table => new
-                {
-                    UserMetricID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TotalBlogPosts = table.Column<int>(type: "int", nullable: false),
-                    TotalUpvotes = table.Column<int>(type: "int", nullable: false),
-                    TotalDownvotes = table.Column<int>(type: "int", nullable: false),
-                    TotalComments = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserMetric", x => x.UserMetricID);
-                    table.ForeignKey(
-                        name: "FK_UserMetric_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "UserID",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -389,9 +389,7 @@ namespace WebApplication6.Migrations
                     CommentID = table.Column<int>(type: "int", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ReactionTypeID = table.Column<int>(type: "int", nullable: false),
-                    CommentID1 = table.Column<int>(type: "int", nullable: true),
-                    CustomUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ReactionTypeID1 = table.Column<int>(type: "int", nullable: true)
+                    CustomUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -414,21 +412,11 @@ namespace WebApplication6.Migrations
                         principalColumn: "CommentID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CommentReactions_Comments_CommentID1",
-                        column: x => x.CommentID1,
-                        principalTable: "Comments",
-                        principalColumn: "CommentID");
-                    table.ForeignKey(
                         name: "FK_CommentReactions_ReactionTypes_ReactionTypeID",
                         column: x => x.ReactionTypeID,
                         principalTable: "ReactionTypes",
                         principalColumn: "ReactionTypeID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CommentReactions_ReactionTypes_ReactionTypeID1",
-                        column: x => x.ReactionTypeID1,
-                        principalTable: "ReactionTypes",
-                        principalColumn: "ReactionTypeID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -471,9 +459,14 @@ namespace WebApplication6.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BlogMetric_BlogID",
-                table: "BlogMetric",
+                name: "IX_BlogMetrics_BlogID",
+                table: "BlogMetrics",
                 column: "BlogID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BlogMetrics_CustomUserId",
+                table: "BlogMetrics",
+                column: "CustomUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Blogs_CustomUserId",
@@ -491,11 +484,6 @@ namespace WebApplication6.Migrations
                 column: "CommentID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommentReactions_CommentID1",
-                table: "CommentReactions",
-                column: "CommentID1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CommentReactions_CustomUserId",
                 table: "CommentReactions",
                 column: "CustomUserId");
@@ -506,11 +494,6 @@ namespace WebApplication6.Migrations
                 column: "ReactionTypeID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommentReactions_ReactionTypeID1",
-                table: "CommentReactions",
-                column: "ReactionTypeID1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CommentReactions_UserID",
                 table: "CommentReactions",
                 column: "UserID");
@@ -519,11 +502,6 @@ namespace WebApplication6.Migrations
                 name: "IX_Comments_BlogID",
                 table: "Comments",
                 column: "BlogID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_BlogID1",
-                table: "Comments",
-                column: "BlogID1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_CustomUserId",
@@ -561,18 +539,18 @@ namespace WebApplication6.Migrations
                 column: "ReactionTypeID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reactions_ReactionTypeID1",
-                table: "Reactions",
-                column: "ReactionTypeID1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reactions_UserID",
                 table: "Reactions",
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserMetric_UserID",
-                table: "UserMetric",
+                name: "IX_UserMetrics_CustomUserId",
+                table: "UserMetrics",
+                column: "CustomUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserMetrics_UserID",
+                table: "UserMetrics",
                 column: "UserID");
         }
 
@@ -595,10 +573,13 @@ namespace WebApplication6.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "BlogMetric");
+                name: "BlogMetrics");
 
             migrationBuilder.DropTable(
                 name: "CommentReactions");
+
+            migrationBuilder.DropTable(
+                name: "CustomUser");
 
             migrationBuilder.DropTable(
                 name: "Notifications");
@@ -607,7 +588,7 @@ namespace WebApplication6.Migrations
                 name: "Reactions");
 
             migrationBuilder.DropTable(
-                name: "UserMetric");
+                name: "UserMetrics");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -617,9 +598,6 @@ namespace WebApplication6.Migrations
 
             migrationBuilder.DropTable(
                 name: "ReactionTypes");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Blogs");

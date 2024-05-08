@@ -161,29 +161,29 @@ public class Program
         //{
         //    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<CustomUser>>();
 
-        //    string email = "admin@admin.com";
-        //    string password = "Test@1234";
-        //    if (await userManager.FindByEmailAsync(email) == null)
-        //    {
-        //        var user = new CustomUser();
-        //        user.UserName = email;
-        //        user.Email = email;
-        //        user.EmailConfirmed = true;
-        //        var result = await userManager.CreateAsync(user, password);
-        //        if (result.Succeeded)
-        //        {
-        //            await userManager.AddToRoleAsync(user, "Admin");
-        //        }
-        //        else
-        //        {
-        //            foreach (var error in result.Errors)
-        //            {
-        //                // Log or handle each error
-        //                Console.WriteLine(error.Description);
-        //            }
-        //        }
-        //    }
-        //}
+            string email = "admin@admin.com";
+            string password = "Test@1234";
+            if (await userManager.FindByEmailAsync(email) == null)
+            {
+                var user = new CustomUser();
+                user.UserName = email;
+                user.Email = email;
+                user.EmailConfirmed = true;
+                var result = await userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        // Log or handle each error
+                        Console.WriteLine(error.Description);
+                    }
+                }
+            }
+        }
 
         // Start the application
         await app.RunAsync();

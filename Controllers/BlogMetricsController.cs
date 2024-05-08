@@ -2,33 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication6.Areas.Identity.Data;
 using WebApplication6.Models;
 
-namespace WebApplication6.Controllers
+namespace WebApplication6.Controllers;
+[Authorize(Roles = "Admin,Blogger")] 
+public class BlogMetricsController : Controller
 {
-    public class BlogMetricsController : Controller
-    {
-        private readonly IdentityDBContext _context;
+    private readonly IdentityDBContext _context;
 
-        public BlogMetricsController(IdentityDBContext context)
-        {
+    public BlogMetricsController(IdentityDBContext context)
+    {
             _context = context;
         }
 
-        // GET: BlogMetrics
-        public async Task<IActionResult> Index()
-        {
+    // GET: BlogMetrics
+    public async Task<IActionResult> Index()
+    {
             var identityDBContext = _context.BlogMetric.Include(b => b.Blog);
             return View(await identityDBContext.ToListAsync());
         }
 
-        // GET: BlogMetrics/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
+    // GET: BlogMetrics/Details/5
+    public async Task<IActionResult> Details(int? id)
+    {
             if (id == null)
             {
                 return NotFound();
@@ -45,20 +46,20 @@ namespace WebApplication6.Controllers
             return View(blogMetric);
         }
 
-        // GET: BlogMetrics/Create
-        public IActionResult Create()
-        {
+    // GET: BlogMetrics/Create
+    public IActionResult Create()
+    {
             ViewData["BlogID"] = new SelectList(_context.Blogs, "BlogID", "Body");
             return View();
         }
 
-        // POST: BlogMetrics/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogMetricID,BlogID,TotalUpvotes,TotalDownvotes,TotalComments")] BlogMetric blogMetric)
-        {
+    // POST: BlogMetrics/Create
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create([Bind("BlogMetricID,BlogID,TotalUpvotes,TotalDownvotes,TotalComments")] BlogMetric blogMetric)
+    {
             if (ModelState.IsValid)
             {
                 _context.Add(blogMetric);
@@ -69,9 +70,9 @@ namespace WebApplication6.Controllers
             return View(blogMetric);
         }
 
-        // GET: BlogMetrics/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
+    // GET: BlogMetrics/Edit/5
+    public async Task<IActionResult> Edit(int? id)
+    {
             if (id == null)
             {
                 return NotFound();
@@ -86,13 +87,13 @@ namespace WebApplication6.Controllers
             return View(blogMetric);
         }
 
-        // POST: BlogMetrics/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("BlogMetricID,BlogID,TotalUpvotes,TotalDownvotes,TotalComments")] BlogMetric blogMetric)
-        {
+    // POST: BlogMetrics/Edit/5
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int? id, [Bind("BlogMetricID,BlogID,TotalUpvotes,TotalDownvotes,TotalComments")] BlogMetric blogMetric)
+    {
             if (id != blogMetric.BlogMetricID)
             {
                 return NotFound();
@@ -122,9 +123,9 @@ namespace WebApplication6.Controllers
             return View(blogMetric);
         }
 
-        // GET: BlogMetrics/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
+    // GET: BlogMetrics/Delete/5
+    public async Task<IActionResult> Delete(int? id)
+    {
             if (id == null)
             {
                 return NotFound();
@@ -141,11 +142,11 @@ namespace WebApplication6.Controllers
             return View(blogMetric);
         }
 
-        // POST: BlogMetrics/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int? id)
-        {
+    // POST: BlogMetrics/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int? id)
+    {
             var blogMetric = await _context.BlogMetric.FindAsync(id);
             if (blogMetric != null)
             {
@@ -156,9 +157,8 @@ namespace WebApplication6.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BlogMetricExists(int? id)
-        {
+    private bool BlogMetricExists(int? id)
+    {
             return _context.BlogMetric.Any(e => e.BlogMetricID == id);
         }
-    }
 }

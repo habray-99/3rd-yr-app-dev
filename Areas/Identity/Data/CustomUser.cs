@@ -9,7 +9,6 @@ public class CustomUser : IdentityUser
 {
     [Required] [MaxLength(10)] 
     public string? Role { get; set; }
-    public string? Role { get; set; }
     [ProtectedPersonalData]
     [MaxLength(30)]
     public string? Address { get; set; }

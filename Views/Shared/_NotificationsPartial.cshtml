@@ -1,49 +1,30 @@
-﻿@* @model IEnumerable<WebApplication6.Models.Notification>
+﻿@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
+@inject IdentityDBContext _context
+@using Microsoft.AspNetCore.Identity        
+@using WebApplication6.Areas.Identity.Data
 
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-bell"></i>
-        @* <span class="badge badge-pill badge-danger">@Model.Count(n => !n.IsSeen)</span> *@
-        <@* span class="badge badge-pill badge-danger">5</span>
-    </a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationsDropdown">
-        @foreach (var notification in Model.OrderByDescending(n => n.CreatedDate))
-        {
-            <a class="dropdown-item @(notification.IsSeen ? "" : "font-weight-bold")" href="#">
-                <span>@notification.NotificationType</span>
-                <small class="text-muted">@notification.CreatedDate.Value.ToString("g")</small>
-            </a>
-        }
-    </div> *@
-        @* </li> *@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
-        @model IEnumerable<WebApplication6.Models.Notification>
-@*           
-        <li class="nav-item dropdown bg-primary">
-            <a class="nav-link dropdown-toggle notification-bell" href="#" id="notificationsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell"></i> *@
-                @* <span class="badge badge-pill badge-danger notification-count">@Model.Count(n => !n.IsSeen)</span> *@
-@*                 <span class="badge badge-pill badge-danger notification-count">5</span> 
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationsDropdown">
-                @foreach (var notification in Model.OrderByDescending(n => n.CreatedDate))
-                {
-                    <a class="dropdown-item @(notification.IsSeen ? "" : "font-weight-bold")" href="#">
-                        <span>@notification.NotificationType</span>
-                        <small class="text-muted">@notification.CreatedDate.Value.ToString("g")</small>
-                    </a>
-                }
-            </div>
-        </li>
-         *@
-            
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </div>
+@* <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-bell"></i>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="#">HTML</a></li>
+        <li><a href="#">CSS</a></li>
+        <li><a href="#">JavaScript</a></li>
+    </ul>
+</div> *@
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        @* Dropdown button *@
+        <i class="fa fa-bell"></i>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+</div>

@@ -1,14 +1,14 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using WebApplication6.Areas.Identity.Data;
 using WebApplication6.Models;
 
 namespace WebApplication6.Areas.Identity.Pages.Account;
 
-public class ProfilePage_cshtml :  PageModel
+public class ProfilePage_cshtml : PageModel
 {
     private readonly UserManager<CustomUser> _userManager;
     private readonly SignInManager<CustomUser> _signInManager;

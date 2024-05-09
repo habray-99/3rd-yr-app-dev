@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using WebApplication6.Areas.Identity.Data;
 
 namespace WebApplication6.Areas.Identity.Pages.Account.Manage
@@ -160,7 +159,7 @@ namespace WebApplication6.Areas.Identity.Pages.Account.Manage
             //}
             if (Input.ProfilePictureUpload != null && Input.ProfilePictureUpload.Length > 0)
             {
-                Debug.Write("Size of the image uploaded is: "+Input.ProfilePictureUpload.Length);
+                Debug.Write("Size of the image uploaded is: " + Input.ProfilePictureUpload.Length);
                 // Check the file size (in bytes)
                 if (Input.ProfilePictureUpload.Length > 3 * 1024 * 1024) // 3 MB
                 {

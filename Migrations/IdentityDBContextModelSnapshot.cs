@@ -206,10 +206,8 @@ namespace WebApplication6.Migrations
                         .HasColumnType("bit");
 
                     b.Property<byte[]>("ProfilePicture")
+                        .HasMaxLength(3145728)
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("ProfilePictureFilePath")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -505,9 +503,6 @@ namespace WebApplication6.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserMetricID"));
 
-                    b.Property<string>("CustomUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("TotalBlogPosts")
                         .HasColumnType("int");
 
@@ -525,8 +520,6 @@ namespace WebApplication6.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserMetricID");
-
-                    b.HasIndex("CustomUserId");
 
                     b.HasIndex("UserID");
 
@@ -727,12 +720,8 @@ namespace WebApplication6.Migrations
 
             modelBuilder.Entity("WebApplication6.Models.UserMetric", b =>
                 {
-                    b.HasOne("WebApplication6.Areas.Identity.Data.CustomUser", null)
-                        .WithMany("UserMetrics")
-                        .HasForeignKey("CustomUserId");
-
                     b.HasOne("WebApplication6.Areas.Identity.Data.CustomUser", "User")
-                        .WithMany()
+                        .WithMany("UserMetrics")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

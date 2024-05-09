@@ -260,17 +260,11 @@ namespace WebApplication6.Migrations
                     TotalBlogPosts = table.Column<int>(type: "int", nullable: false),
                     TotalUpvotes = table.Column<int>(type: "int", nullable: false),
                     TotalDownvotes = table.Column<int>(type: "int", nullable: false),
-                    TotalComments = table.Column<int>(type: "int", nullable: false),
-                    CustomUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    TotalComments = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserMetrics", x => x.UserMetricID);
-                    table.ForeignKey(
-                        name: "FK_UserMetrics_AspNetUsers_CustomUserId",
-                        column: x => x.CustomUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_UserMetrics_AspNetUsers_UserID",
                         column: x => x.UserID,
@@ -542,11 +536,6 @@ namespace WebApplication6.Migrations
                 name: "IX_Reactions_UserID",
                 table: "Reactions",
                 column: "UserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserMetrics_CustomUserId",
-                table: "UserMetrics",
-                column: "CustomUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserMetrics_UserID",

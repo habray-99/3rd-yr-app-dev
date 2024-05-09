@@ -12,7 +12,7 @@ using WebApplication6.Areas.Identity.Data;
 namespace WebApplication6.Migrations
 {
     [DbContext(typeof(IdentityDBContext))]
-    [Migration("20240506140721_1")]
+    [Migration("20240509014321_1")]
     partial class _1
     {
         /// <inheritdoc />
@@ -506,9 +506,6 @@ namespace WebApplication6.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserMetricID"));
 
-                    b.Property<string>("CustomUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("TotalBlogPosts")
                         .HasColumnType("int");
 
@@ -526,8 +523,6 @@ namespace WebApplication6.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserMetricID");
-
-                    b.HasIndex("CustomUserId");
 
                     b.HasIndex("UserID");
 
@@ -728,12 +723,8 @@ namespace WebApplication6.Migrations
 
             modelBuilder.Entity("WebApplication6.Models.UserMetric", b =>
                 {
-                    b.HasOne("WebApplication6.Areas.Identity.Data.CustomUser", null)
-                        .WithMany("UserMetrics")
-                        .HasForeignKey("CustomUserId");
-
                     b.HasOne("WebApplication6.Areas.Identity.Data.CustomUser", "User")
-                        .WithMany()
+                        .WithMany("UserMetrics")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

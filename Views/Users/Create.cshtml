@@ -25,9 +25,9 @@
             <!-- ProfilePicture handling is more complex due to binary data. Consider using a file upload control -->
             <!-- For demonstration, we'll skip ProfilePicture -->
             <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" required />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+                <label asp-for="UserName" class="control-label" hidden></label>
+                <input asp-for="UserName" class="form-control" required hidden value="Admin"/>
+                <span asp-validation-for="UserName" class="text-danger" hidden></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
@@ -42,11 +42,11 @@
 
             <!-- Password handling is complex due to security concerns. Consider using a password field or a custom approach -->
             <!-- For demonstration, we'll skip Password -->
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Role" class="control-label"></label>
                 <input asp-for="Role" class="form-control" required />
                 <span asp-validation-for="Role" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

@@ -21,6 +21,9 @@ public class Program
         builder.Services.AddDefaultIdentity<CustomUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<IdentityDBContext>();
+        //builder.Services.AddScoped<DashboardService>();
+
+        builder.Services.AddRazorPages();
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();

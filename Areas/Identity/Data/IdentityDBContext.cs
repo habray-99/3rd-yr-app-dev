@@ -109,7 +109,7 @@ public class IdentityDBContext : IdentityDbContext<CustomUser>
 
         modelBuilder.Entity<UserMetric>()
             .HasOne(um => um.User)
-            .WithMany()
+            .WithMany(u => u.UserMetrics)
             .HasForeignKey(um => um.UserID)
             .OnDelete(DeleteBehavior.Restrict);
     }

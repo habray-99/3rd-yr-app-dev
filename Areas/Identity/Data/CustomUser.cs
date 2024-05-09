@@ -1,16 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using WebApplication6.Models;
 
 namespace WebApplication6.Areas.Identity.Data;
 public class CustomUser : IdentityUser
 {
-    [Required] [MaxLength(10)] 
+    [Required]
+    [MaxLength(10)]
     public string? Role { get; set; }
     [ProtectedPersonalData]
     [MaxLength(30)]
     public string? Address { get; set; }
-    [MaxLength(3*1024*1024)]
+    [MaxLength(3 * 1024 * 1024)]
     public byte[]? ProfilePicture { get; set; }
     public DateTime DateOfBirth { get; set; } = DateTime.Now;
     public ICollection<Blog>? Blogs { get; set; }

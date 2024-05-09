@@ -1,4 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using WebApplication6.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@using System.Drawing.Text
+@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
+@inject IdentityDBContext _context
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,10 +29,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">User</a>
-                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">User</a>
+                            </li>
+                        }
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Blogs" asp-action="Index">Blog</a>
@@ -48,6 +56,16 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                    @{
+                    var currentUser = await UserManager.GetUserAsync(User);
+                    if (currentUser != null)
+                    {
+                            var notifications = _context.Notifications
+                            .Where(n => n.UserID == currentUser.Id)
+                            .ToList();
+                        <partial name="_NotificationsPartial" model="@notifications" />
+                    }
+                }
                     <partial name="_LoginPartial" />
                 </div>
             </div>

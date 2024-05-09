@@ -42,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Dashboard\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\BlogMetrics\Create.cshtml" />
     <_ContentIncludedByDefault Remove="Views\BlogMetrics\Delete.cshtml" />
     <_ContentIncludedByDefault Remove="Views\BlogMetrics\Details.cshtml" />
@@ -86,6 +87,10 @@
 
   <ItemGroup>
     <Folder Include="Pages\Users\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Dashboard\Index.cshtml" />
   </ItemGroup>
 
 </Project>

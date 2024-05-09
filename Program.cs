@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using WebApplication6.Areas.Identity.Data;
-using WebApplication6.Models;
 using WebApplication6.Services;
 
 namespace WebApplication6;

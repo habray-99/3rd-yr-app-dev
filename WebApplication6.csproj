@@ -84,4 +84,8 @@
     <_ContentIncludedByDefault Remove="Views\UserMetrics\Index.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Users\" />
+  </ItemGroup>
+
 </Project>

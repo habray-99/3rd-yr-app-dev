@@ -32,13 +32,13 @@
                 <input asp-for="Input.ProfilePictureUpload" type="file" class="form-control" accept="image/*" />
                 <span asp-validation-for="Input.ProfilePictureUpload" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @* <div class="form-group">
                   <label for="ProfilePictureUpload" class="control-label">Profile Picture</label>
                 <input id="ProfilePictureUpload" name="ProfilePictureUpload" type="file" class="form-control" accept="image/*" /> 
                
                  <span asp-validation-for="Input.ProfilePictureUpload" class="text-danger"></span>
                
-            </div>
+            </div> *@
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
     </div>

@@ -43,8 +43,8 @@ public class IdentityDBContext : IdentityDbContext<CustomUser>
             .HasForeignKey(b => b.UserID)
             .OnDelete(DeleteBehavior.Restrict);
         modelBuilder.Entity<Blog>()
-            .HasMany(b => b.Comments) 
-            .WithOne(c => c.Blog) 
+            .HasMany(b => b.Comments)
+            .WithOne(c => c.Blog)
             .HasForeignKey(c => c.BlogID)
             .OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<Reaction>()

@@ -49,7 +49,7 @@ public class IdentityDBContext : IdentityDbContext<CustomUser>
             .OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<Reaction>()
             .HasOne(r => r.Blog)
-            .WithMany()
+            .WithMany(b => b.Reactions)
             .HasForeignKey(r => r.BlogID)
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -114,11 +114,5 @@ public class IdentityDBContext : IdentityDbContext<CustomUser>
             .OnDelete(DeleteBehavior.Restrict);
     }
 
-public DbSet<WebApplication6.Models.User> User { get; set; } = default!;
-
-// public DbSet<WebApplication6.Models.User> User { get; set; } = default!;
-
-
-
-    //public DbSet<User> User { get; set; } = default!;
+    public DbSet<WebApplication6.Models.User> User { get; set; } = default!;
 }

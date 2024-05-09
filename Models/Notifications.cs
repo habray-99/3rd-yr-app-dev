@@ -13,7 +13,8 @@ namespace WebApplication6.Models
         public string? NotificationType { get; set; }
         [Required]
         public int? EntityID { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; } = DateTime.Now;
+        public bool IsSeen { get; set; } = false;
         public virtual CustomUser? User { get; set; }
     }
 }

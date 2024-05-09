@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WebApplication6.Areas.Identity.Data;
 
@@ -20,5 +21,6 @@ namespace WebApplication6.Models
         public virtual CustomUser? User { get; set; }
 
         public ICollection<Comment>? Comments { get; set; }
+        public ICollection<Reaction>? Reactions { get; set; }
     }
 }

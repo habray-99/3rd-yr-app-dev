@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 using WebApplication6.Areas.Identity.Data;
 
 namespace WebApplication6.Models

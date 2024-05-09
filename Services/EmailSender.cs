@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Net;
 using System.Net.Mail;
-using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace WebApplication6.Services
 {

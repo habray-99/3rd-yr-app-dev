@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using WebApplication6.Areas.Identity.Data;
 
 namespace WebApplication6.Models

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication6.Areas.Identity.Data;
-using WebApplication6.Models;
 
 namespace WebApplication6.Controllers
 {
@@ -31,7 +25,7 @@ namespace WebApplication6.Controllers
         public async Task<IActionResult> Index(string searchQuery)
         {
             var users = from u in _context.Users
-                select u;
+                        select u;
 
             if (!String.IsNullOrEmpty(searchQuery))
             {
